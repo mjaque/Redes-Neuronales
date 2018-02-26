@@ -7,7 +7,12 @@ public class Neuron {
 	private ArrayList<Double> listOfWeightOut;
 
 	public Neuron(int numberOfWeightsIn, int numberOfWeightsOut) {
-		//TODO:
+		this.listOfWeightIn = new ArrayList<>();
+		this.listOfWeightOut = new ArrayList<>();
+		while (numberOfWeightsIn-- > 0)
+			this.listOfWeightIn.add(Math.random());
+		while (numberOfWeightsOut-- > 0)
+			this.listOfWeightOut.add(Math.random());
 	}
 
 	public ArrayList<Double> getListOfWeightIn() {
@@ -28,7 +33,7 @@ public class Neuron {
 
 	@Override
 	public String toString() {
-		//TODO:
+		return "\nNeuron \n\tlistOfWeightIn=" + listOfWeightIn + ", \n\tlistOfWeightOut=" + listOfWeightOut;
 	}
 	
 	

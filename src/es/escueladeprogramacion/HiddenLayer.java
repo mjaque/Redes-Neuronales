@@ -5,12 +5,12 @@ import java.util.ArrayList;
 public class HiddenLayer extends Layer {
 
 	public HiddenLayer(int numberOfNeuronsInPreviousLayer, int numberOfNeuronsInLayer, int numberOfNeuronsInNextLayer) {
-		//TODO:
+		super(numberOfNeuronsInPreviousLayer, numberOfNeuronsInLayer, numberOfNeuronsInNextLayer);
 	}
 	
 	@Override
 	public String toString() {
-		//TODO:
+		return "\n\nHIDDENLAYER" + super.toString();
 	}
 
 }

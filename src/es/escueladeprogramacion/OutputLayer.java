@@ -3,11 +3,11 @@ package es.escueladeprogramacion;
 public class OutputLayer extends Layer {
 
 	public OutputLayer(int numberOfNeuronsInPreviousLayer, int numberOfNeuronsInOutputLayer) {
-		//TODO:
+		super(numberOfNeuronsInPreviousLayer, numberOfNeuronsInOutputLayer, numberOfNeuronsInOutputLayer);
 	}
 	
 	@Override
 	public String toString() {
-		//TODO:
+		return "\n\nOUTPUTLAYER" + super.toString();
 	}
 }

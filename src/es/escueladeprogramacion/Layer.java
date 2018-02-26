@@ -7,7 +7,9 @@ public class Layer {
 	private ArrayList<Neuron> listOfNeurons;
 	
 	public Layer(int numberOfNeuronsInPreviousLayer, int numberOfNeuronsInLayer, int numberOfNeuronsInNextLayer) {
-		//TODO:
+		this.listOfNeurons = new ArrayList<>();
+		while (numberOfNeuronsInLayer-- > 0) 
+			this.listOfNeurons.add(new Neuron(numberOfNeuronsInPreviousLayer, numberOfNeuronsInNextLayer));
 	}
 	
 	public ArrayList<Neuron> getListOfNeurons() {
@@ -19,7 +21,11 @@ public class Layer {
 
 	@Override
 	public String toString() {
-		//TODO:
+		String description = "";
+		for (Neuron neuron : this.listOfNeurons) {
+			description += neuron.toString(); 
+		}
+		return description;
 	}
 
 	
