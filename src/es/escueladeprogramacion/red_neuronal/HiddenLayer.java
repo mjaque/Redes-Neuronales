@@ -1,16 +1,14 @@
-package es.escueladeprogramacion;
-
-import java.util.ArrayList;
+package es.escueladeprogramacion.red_neuronal;
 
 public class HiddenLayer extends Layer {
 
-	public HiddenLayer(int numberOfNeuronsInPreviousLayer, int numberOfNeuronsInLayer, int numberOfNeuronsInNextLayer) {
-		super(numberOfNeuronsInPreviousLayer, numberOfNeuronsInLayer, numberOfNeuronsInNextLayer);
-	}
-	
-	@Override
-	public String toString() {
-		return "\n\nHIDDENLAYER" + super.toString();
+	/**
+	 * Crea una capa oculta.
+	 * @param numberOfNeurons Número de neuronas en la capa.
+	 * @param previousLayer Capa anterior con la que se conecta la nueva capa oculta.
+	 */
+	public HiddenLayer(int numberOfNeurons, Layer previousLayer) {
+		super(numberOfNeurons, previousLayer);
 	}
 
 }
