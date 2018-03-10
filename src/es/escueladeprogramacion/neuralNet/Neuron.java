@@ -1,10 +1,11 @@
-package es.escueladeprogramacion.red_neuronal;
+package es.escueladeprogramacion.neuralNet;
 
+import java.text.DecimalFormat;
 import java.util.HashSet;
 import java.util.Set;
 
 
-public class Neuron implements Connectable{
+public class Neuron{
 	private Double value;
 	private Set<Connection> inputs = new HashSet<>();
 	private ActivationFunction activationFunction;
@@ -31,7 +32,7 @@ public class Neuron implements Connectable{
 		//Calculamos la suma de entradas ponderadas con sus pesos
 		Double sum = 0.0;
 		for(Connection connection : inputs) {
-			sum += connection.getWeight() * connection.getInput().getValue();
+			sum += connection.getWeight() * connection.getNeuron().getValue();
 		}
 		
 		//Sumamos la bias
@@ -40,7 +41,7 @@ public class Neuron implements Connectable{
 		
 		//Aplicamos la función de activación
 		this.value = this.activationFunction.compute(sum);
-		
+
 		return this.value;
 	}
 	
@@ -53,7 +54,6 @@ public class Neuron implements Connectable{
 	}
 	
 	//Getters y Setters
-	@Override
 	public Double getValue() {
 		return value;
 	}
@@ -81,9 +81,11 @@ public class Neuron implements Connectable{
 	
 	@Override
 	public String toString() {
-		//return "Neuron [value=" + value + ", inputs=" + inputs + ", activateFunction=" + activationFunction + ", bias="
-		//		+ bias + "]";
-		return "Neuron: [value=" + value + "]";
+		String description = "Neuron: [value = " + value + "\n\t\t\tweights: [ ";
+		for (Connection input : this.inputs)
+			description += String.format("%6.2E", input.getWeight()) + " ";
+		description += "]]";
+		return description;
 	}
 	
 }

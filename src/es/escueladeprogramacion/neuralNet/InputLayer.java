@@ -1,5 +1,6 @@
-package es.escueladeprogramacion.red_neuronal;
+package es.escueladeprogramacion.neuralNet;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -11,25 +12,27 @@ import java.util.Set;
  */
 public class InputLayer extends Layer {
 	
-	private List<Input> inputs;
+	private List<Neuron> inputs;
 	
 	/**
 	 * Crea una capa de entrada con el número de entradas indicado.
 	 * @param inputs Número de entradas.
 	 */
-	public InputLayer(List<Input> inputs) {
-		super(inputs.size(), new HashSet<>(inputs));
-		this.inputs = inputs;
+	public InputLayer(int numberOfInputs) {
+		super(numberOfInputs);
+		this.inputs = new ArrayList<>();
 		
 		//Ponemos todos los pesos a cero.
 		//En la capa de entrada no se ponderan las entradas
-		for (Neuron neuron : this.getNeurons()) 	//Para cada neurona
+		for (Neuron neuron : this.getNeurons()) { 	//Para cada neurona
+			this.inputs.add(neuron);
 			for (Connection connection : neuron.getInputs()) 
 				connection.setWeight(1.0);
+		}
 	}
 	
 	//Getters y Setters
-	public List<Input> getInputs() {
+	public List<Neuron> getInputs() {
 		return inputs;
 	}
 

@@ -1,4 +1,4 @@
-package es.escueladeprogramacion.red_neuronal;
+package es.escueladeprogramacion.neuralNet;
 
 import java.util.ArrayList;
 

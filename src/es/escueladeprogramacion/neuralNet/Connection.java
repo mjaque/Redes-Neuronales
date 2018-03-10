@@ -1,15 +1,15 @@
-package es.escueladeprogramacion.red_neuronal;
+package es.escueladeprogramacion.neuralNet;
 
 public class Connection {
 	private Double weight;
-	private final Connectable input;
+	private final Neuron neuron;
 	
 	/**
 	 * Crea una nueva conexión asignándole un peso aleatorio
 	 * @param neuron Neurona de entrada en la conexión
 	 */
-	public Connection(Connectable input) {
-		this.input = input;
+	public Connection(Neuron input) {
+		this.neuron = input;
 		this.weight = Math.random() * Double.MAX_VALUE;
 		if (Math.random() < 0.5)
 			this.weight *= -1;
@@ -24,13 +24,13 @@ public class Connection {
 		this.weight = weight;
 	}
 
-	public Connectable getInput() {
-		return input;
+	public Neuron getNeuron() {
+		return neuron;
 	}
 
 	@Override
 	public String toString() {
-		return "Connection [weight=" + weight + ", input=" + input + "]";
+		return "Connection [weight=" + weight + ", neuron=" + neuron + "]";
 	}
 
 

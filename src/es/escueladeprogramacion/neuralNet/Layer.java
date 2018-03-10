@@ -1,4 +1,4 @@
-package es.escueladeprogramacion.red_neuronal;
+package es.escueladeprogramacion.neuralNet;
 
 import java.util.HashSet;
 import java.util.List;
@@ -7,16 +7,20 @@ import java.util.Set;
 public abstract class Layer {
 	private final Set<Neuron> neurons = new HashSet<>();
 
+	public Layer(int numberOfNeurons) {
+		this(numberOfNeurons, new HashSet<Neuron>());
+	}
+	
 	public Layer(int numberOfNeurons, Layer previousLayer) {
 		this(numberOfNeurons, new HashSet<>(previousLayer.getNeurons()));
 	}
 
-	public Layer(int numberOfNeurons, Set<Connectable> connectables) {
+	public Layer(int numberOfNeurons, Set<Neuron> neurons) {
 		// Creamos las neuronas con sus conexiones
 		for (int i = 0; i < numberOfNeurons; i++) { // Para cada neurona
 			Set<Connection> connections = new HashSet<>();
-			for (Connectable connectable : connectables) // Creamos una conexión para cada entrada
-				connections.add(new Connection(connectable));
+			for (Neuron neuron : neurons) // Creamos una conexión para cada entrada
+				connections.add(new Connection(neuron));
 			//Para poner otra función de activiación que no esté predefinida en ActivationFunction
 			//new Neuron(connections, (value) -> {return value*2.0;}, bias);
 			this.getNeurons().add(new Neuron(connections, ActivationFunction.step(), null));

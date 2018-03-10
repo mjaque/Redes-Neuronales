@@ -1,9 +1,9 @@
 package es.escueladeprogramacion;
 
-import es.escueladeprogramacion.red_neuronal.NeuralNet;
-import es.escueladeprogramacion.red_neuronal.Trainer;
-import es.escueladeprogramacion.red_neuronal.Trainer.ActivationFunc;
-import es.escueladeprogramacion.red_neuronal.Trainer.TrainingType;
+import es.escueladeprogramacion.neuralNet.NeuralNet;
+import es.escueladeprogramacion.neuralNet.Trainer;
+import es.escueladeprogramacion.neuralNet.Trainer.ActivationFunc;
+import es.escueladeprogramacion.neuralNet.Trainer.TrainingType;
 
 public class PerceptronTest {
 

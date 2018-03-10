@@ -1,15 +1,16 @@
-package es.escueladeprogramacion.red_neuronal;
+package es.escueladeprogramacion.neuralNet;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import es.escueladeprogramacion.neuralNet.exceptions.InvalidInputDimensionException;
+
 public class NeuralNet {
-	private final List<Input> inputs;						//Valores de entrada
-	private InputLayer inputLayer;							//capa de entrada
-	private List<HiddenLayer> hiddenLayers;			//lista de capas ocultas
-	private OutputLayer outputLayer;						//capa de salida
+	private InputLayer inputLayer;						//capa de entrada
+	private List<HiddenLayer> hiddenLayers;				//lista de capas ocultas
+	private OutputLayer outputLayer;					//capa de salida
 	
 	/**
 	 * Constructor
@@ -19,13 +20,8 @@ public class NeuralNet {
 	 */
 	public NeuralNet(int numberOfInputs, int[] dimsOfHiddenLayers, int numberOfOutputs) {
 		
-		//Creamos los inputs de la red
-		this.inputs = new ArrayList<>();
-		for (int i = 0; i < numberOfInputs; i++)
-			this.inputs.add(new Input());
-		
 		//Creamos la capa de entrada
-		this.inputLayer = new InputLayer(this.inputs);
+		this.inputLayer = new InputLayer(numberOfInputs);
 		
 		//Creamos las capas ocultas
 		this.hiddenLayers = new ArrayList<>();
@@ -58,15 +54,11 @@ public class NeuralNet {
 		return outputLayer;
 	}
 
-	public List<Input> getInputs() {
-		return inputs;
-	}
-	
 	public void setInputs(Double[] inputs) throws Exception {
-		if (inputs.length != this.inputs.size())
-			throw new Exception("Wrong number of inputs. Should be " + this.inputs.size() + " instead of " + inputs.length);
+		if (inputs.length != this.getInputLayer().getInputs().size())
+			throw new InvalidInputDimensionException();
 		for (int i = 0; i < inputs.length; i++)
-			this.inputs.get(i).setValue(inputs[i]);
+			this.getInputLayer().getInputs().get(i).setValue(inputs[i]);
 	}
 	
 	@Override
@@ -83,9 +75,13 @@ public class NeuralNet {
 	/**
 	 * Pone los valores recibidos a la entrada de la red.
 	 * @param inputValues Valores para las neuronas de la capa de entrada.
+	 * @throws Exception 
 	 */
-	public void setInputValues(Double[] inputValues) {
-		// TODO Auto-generated method stub
+	public void setInputValues(Double[] inputValues) throws InvalidInputDimensionException {
+		if(inputValues.length != this.inputLayer.getInputs().size())
+			throw new InvalidInputDimensionException();
+		for (int i = 0; i < inputValues.length; i++) 
+			this.inputLayer.getInputs().get(i).setValue(inputValues[i]);
 	}
 
 	/**
@@ -93,16 +89,20 @@ public class NeuralNet {
 	 * @return Valores de las neuronas de la capa de salida.
 	 */
 	public Double[] getOutputValues() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.outputLayer.getOutputs();
 	}
 
 	/**
 	 * Calcula los valores de salida en función de los valores de entrada.
 	 */
 	public void compute() {
-		// TODO Auto-generated method stub
-		
+		for(Neuron neuron : this.getInputLayer().getNeurons())
+			neuron.compute();
+		for(HiddenLayer hiddenLayer : this.getHiddenLayers())
+			for(Neuron neuron : hiddenLayer.getNeurons())
+				neuron.compute();
+		for(Neuron neuron : this.getOutputLayer().getNeurons())
+			neuron.compute();
 	}
 
 }
